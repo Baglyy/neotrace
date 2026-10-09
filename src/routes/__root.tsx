@@ -1,0 +1,31 @@
+import { Outlet, createRootRoute } from '@tanstack/react-router'
+
+import { TanStackRouterDevtoolsPanel } from '@tanstack/react-router-devtools'
+import { TanStackDevtools } from '@tanstack/react-devtools'
+import { ThemeProvider } from '@mui/material/styles'
+
+import '../app/theme/styles.css'
+import theme from '../app/theme/theme'
+
+export const Route = createRootRoute({
+  component: RootComponent,
+})
+
+function RootComponent() {
+  return (
+    <ThemeProvider theme={theme}>
+      <Outlet />
+      <TanStackDevtools
+        config={{
+          position: 'bottom-right',
+        }}
+        plugins={[
+          {
+            name: 'TanStack Router',
+            render: <TanStackRouterDevtoolsPanel />,
+          },
+        ]}
+      />
+    </ThemeProvider>
+  )
+}
